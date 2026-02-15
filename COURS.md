@@ -22,7 +22,7 @@
 
 ## 1 - Présentation de PHP
 
-![PHP Elephpant](https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg)
+![PHP Elephpant](Data/Elephpant.png)
 
 **PHP**, acronyme récursif de **Hypertext Preprocessor**, est un langage de script utilisé le plus souvent côté serveur.
 
