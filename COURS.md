@@ -411,6 +411,12 @@ nom_de_variable = "Yes";    // ❌ ne commence pas par $
 #### ✏️ Exercice 07
 > Créez un fichier `07-variables-non-valides.php` : essayez de déclarer des variables non valides et observez les erreurs.
 
+
+---
+
+
+[Retour à la table des matières](#table-des-matières)
+
 ---
 
 ### 6.2 - Les types de données
@@ -486,6 +492,10 @@ unset($a);
 
 ---
 
+[Retour à la table des matières](#table-des-matières)
+
+---
+
 ### 6.4 - Les tableaux
 
 Un tableau est une variable qui peut contenir **plusieurs valeurs**. Les tableaux en PHP sont des structures très flexibles.
@@ -521,6 +531,12 @@ $fruits[] = "kiwi"; // ajouté à l'index 5
 #### ✏️ Exercice 09
 > Créez `09-array-index.php` : déclarez `$monTab = ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'];` et affichez chaque élément séparé par un `<hr>` en utilisant `echo` et les index.
 
+---
+
+[Retour à la table des matières](#table-des-matières)
+
+---
+
 #### 6.4.2 - Les tableaux associatifs
 
 Les clés sont des **chaînes de caractères**.
@@ -539,6 +555,12 @@ echo $personne["age"];    // 42
 
 #### ✏️ Exercice 10
 > Créez `10-array-assoc.php` : déclarez `$monTabAssoc = ["prenom" => "Michaël", "nom" => "Pitz", "caracteristique" => "égocentrique", "dateDeNaissance" => "1951-03-02"];` et affichez chaque valeur séparée par un `<hr>`.
+
+---
+
+[Retour à la table des matières](#table-des-matières)
+
+---
 
 #### 6.4.3 - Les tableaux multidimensionnels
 
@@ -572,6 +594,10 @@ echo $stagiaires["WEBDEV02"]["Sites"]["github"];
 
 #### ✏️ Exercice 11
 > Créez `11-array-multi.php` : créez un tableau multidimensionnel de 3 stagiaires avec nom, prénom et un sous-tableau de sites (perso + github). Affichez le github du troisième stagiaire.
+
+---
+
+[Retour à la table des matières](#table-des-matières)
 
 ---
 
