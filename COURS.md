@@ -34,6 +34,15 @@ Il permet aux apprenants de comprendre le flux d'exécution séquentiel, la gest
    - [Les balises PHP](#52---les-balises-php)
    - [Les commentaires](#53---les-commentaires)
    - [Placement des balises PHP](#54---placement-des-balises-php-dans-le-html)
+6. [Les variables](#6---les-variables)
+   - [Déclaration de variables](#61---déclaration-de-variables-non-strictement-typées)
+   - [Les types de données](#62---les-types-de-données)
+   - [Le casting (transtypage)](#63---le-casting-transtypage)
+   - [Les tableaux](#64---les-tableaux)
+   - [Les tableaux indexés](#641---les-tableaux-indexés)
+   - [Les tableaux associatifs](#642---les-tableaux-associatifs)
+   - [Les tableaux multidimensionnels](#643---les-tableaux-multidimensionnels)
+   - [Les variables superglobales](#65---les-variables-superglobales)
 
 ## 1 - Présentation de PHP
 
@@ -131,7 +140,7 @@ Nous préférons XAMPP à MAMP, car MAMP (version gratuite) pose des problèmes 
 
 ### 3.4 - Vérification de l'installation
 
-Créez un fichier `01-info.php` dans votre dossier `Stagiaires\{Prenom}`  avec le contenu suivant :
+Créez un fichier `info-php.php` dans votre dossier `Stagiaires\{Prenom}`  avec le contenu suivant :
 
 ```php
 <?php
@@ -223,7 +232,10 @@ FIN FONCTION
 📖 **Ressources algorithmique** :
 - [Cours d'algorithmique - France IOI](http://www.france-ioi.org/)
 - [Algorithmique pour l'apprenti programmeur - OpenClassrooms](https://openclassrooms.com/fr/courses/7527306-decouvrez-le-fonctionnement-des-algorithmes)
-- [Exercices d'algorithmique - Prologin](https://prologin.org/)
+- Il existe de nombreux exercices d'algorithmique sur des plateformes comme [LeetCode](https://leetcode.com/), [HackerRank](https://www.hackerrank.com/domains/algorithms) ou [CodeWars](https://www.codewars.com/).
+- [Pseudo-code](https://fr.wikipedia.org/wiki/Pseudo-code) : un langage de description d'algorithmes, plus proche du langage naturel que du code source.
+
+Vous verrez que les concepts d'algorithmique sont universels et s'appliquent à tous les langages de programmation, y compris PHP. Vous aurez un cours dédié à l'algorithmique avancée, mais il est important de maîtriser ces bases dès le début.
 
 > 💡 **Conseil** : Avant d'écrire du code PHP, écrivez d'abord votre algorithme en pseudo-code !
 
@@ -243,6 +255,7 @@ Les fichiers PHP sont des fichiers texte enregistrés avec l'extension `.php`. L
 
 Le code PHP est écrit entre les balises `<?php` et `?>`.
 
+
 ```php
 <?php
 echo "Hello World";
@@ -250,6 +263,7 @@ echo "Hello World";
 ```
 
 Il existe une **balise courte** `<?= ?>` équivalente à `<?php echo ?>` :
+
 
 ```php
 <?= "Hello World" ?>
@@ -261,6 +275,7 @@ Il existe une **balise courte** `<?= ?>` équivalente à `<?php echo ?>` :
 - Le `;` est **facultatif** juste avant `?>`
 - Si le fichier ne contient **que du PHP**, on **ne ferme pas** la balise `?>` (bonne pratique)
 
+
 ```php
 <?php
 echo "Hello World";
@@ -271,13 +286,13 @@ echo "<br>Hello friends";
 📖 [Documentation : Balises PHP](https://www.php.net/manual/fr/language.basic-syntax.phptags.php)
 
 #### ✏️ Exercice 01
-> Créez un fichier `01-hello-world.php` qui affiche **"Hello World"** dans le navigateur.
+> Créez un fichier `01-hello-world.php` dans votre dossier `Stagiaires\{Prenom}\` qui affiche **"Hello World"** dans le navigateur.
 
 #### ✏️ Exercice 02
-> Créez un fichier `02-hello-world-short.php` qui affiche **"Hello World"** en utilisant la balise courte `<?= ?>`.
+> Créez un fichier `02-hello-world-short.php` dans votre dossier `Stagiaires\{Prenom}\` qui affiche **"Hello World"** en utilisant la balise courte `<?= ?>`.
 
 #### ✏️ Exercice 03
-> Créez un fichier `03-hello-friends.php` qui affiche **"Hello World"** suivi de **"Hello friends"** sur la ligne suivante.
+> Créez un fichier `03-hello-friends.php` dans votre dossier `Stagiaires\{Prenom}\` qui affiche **"Hello World"** suivi de **"Hello friends"** sur la ligne suivante.
 
 ---
 
@@ -300,7 +315,7 @@ sur plusieurs lignes
 📖 [Documentation : Commentaires](https://www.php.net/manual/fr/language.basic-syntax.comments.php)
 
 #### ✏️ Exercice 04
-> Créez un fichier `04-commentaires.php` qui **n'affiche rien** dans le navigateur, mais contient les trois types de commentaires.
+> Créez un fichier `04-commentaires.php` dans votre dossier `Stagiaires\{Prenom}\` qui **n'affiche rien** dans le navigateur, mais contient les trois types de commentaires.
 
 ---
 
@@ -330,7 +345,268 @@ Nous avons utilisé la fonction native `date()` et stocké le résultat dans une
 📖 [Documentation : date()](https://www.php.net/manual/fr/function.date.php) | [Formats de date](https://www.php.net/manual/fr/datetime.format.php)
 
 #### ✏️ Exercice 05
-> Créez un fichier `05-php-placement.php` qui affiche la date et l'heure du serveur dans une page HTML complète.
+> Créez un fichier `05-php-placement.php` dans votre dossier `Stagiaires\{Prenom}\` qui affiche la date et l'heure du serveur dans une page HTML complète.
+
+---
+
+[Retour à la table des matières](#table-des-matières)
+
+---
+
+## 6 - Les variables
+
+Une variable est un **conteneur pour stocker des informations**. C'est la **première brique** d'un langage de programmation.
+
+**Règles de nommage :**
+- Commence par `$` suivi d'une lettre ou `_`
+- Ne contient que des lettres, chiffres et `_`
+- **Sensible à la casse** (`$nom` ≠ `$Nom`)
+- Peut changer de type après sa création (typage non strict)
+
+📖 [Documentation : Variables](https://www.php.net/manual/fr/language.variables.basics.php) | [Variables prédéfinies](https://www.php.net/manual/fr/reserved.variables.php)
+
+### 6.1 - Déclaration de variables non strictement typées
+
+```php
+<?php
+// string (chaîne de caractères)
+$nom_de_variable = "valeur de la variable";
+
+// integer (nombre entier)
+$nomDeVariable2 = 123;
+
+// float (nombre décimal)
+$NomDeVariable3 = 123.456;
+
+// boolean (vrai ou faux)
+$estActif = true; // ou false
+
+// array (tableau indexé)
+$nombres = [1, 2, 3];
+
+// array (tableau associatif)
+$personne = ["clef1" => "valeur1", "clef2" => "valeur2"];
+
+// null (absence de valeur)
+$rien = null;
+
+// Affichage avec le débogueur var_dump()
+var_dump($nom_de_variable, $nomDeVariable2, $NomDeVariable3);
+```
+
+**Noms de variables NON VALIDES :**
+
+```php
+<?php
+$Nom de Variable = 5;       // ❌ contient des espaces
+$123Nom_De_Variable = 3;    // ❌ commence par un chiffre
+$toto@mailcity.com = [];    // ❌ caractère spécial @
+$Nom-de-variable = "coucou";// ❌ signe - interdit (kebab-case)
+nom_de_variable = "Yes";    // ❌ ne commence pas par $
+```
+
+#### ✏️ Exercice 06
+> Créez un fichier `06-variables-valides.php` : déclarez des variables de chaque type (string, integer, float, boolean, array, null) et affichez-les avec `var_dump()`.
+
+#### ✏️ Exercice 07
+> Créez un fichier `07-variables-non-valides.php` : essayez de déclarer des variables non valides et observez les erreurs.
+
+---
+
+### 6.2 - Les types de données
+
+| Type | Description | Exemple |
+|------|-------------|---------|
+| `string` | Chaîne de caractères | `"Bonjour"` |
+| `int` (integer) | Nombre entier | `42` |
+| `float` | Nombre décimal | `3.14` |
+| `bool` (boolean) | Vrai ou faux | `true`, `false` |
+| `array` | Tableau | `[1, 2, 3]` |
+| `null` | Absence de valeur | `null` |
+| `object` | Instance d'une classe | *(cours avancé)* |
+| `resource` | Ressource externe | *(fichier, connexion BDD)* |
+
+**Fonctions utiles pour les types :**
+
+```php
+<?php
+$a = "42";
+
+// Connaître le type
+echo gettype($a);      // string
+var_dump($a);           // string(2) "42"
+
+// Vérifier le type
+is_string($a);          // true
+is_int($a);             // false
+is_float($a);           // false
+is_bool($a);            // false
+is_array($a);           // false
+is_null($a);            // false
+is_numeric($a);         // true (contient un nombre)
+
+// Vérifier l'existence et le contenu
+isset($a);              // true (existe et n'est pas null)
+empty($a);              // false (n'est pas vide)
+```
+
+📖 [Documentation : Types](https://www.php.net/manual/fr/language.types.php)
+
+---
+
+### 6.3 - Le casting (transtypage)
+
+Le casting permet de **convertir** un type en un autre :
+
+```php
+<?php
+$chaine = "42";
+
+$entier = (int) $chaine;       // 42
+$decimal = (float) $chaine;    // 42.0
+$booleen = (bool) $chaine;     // true
+$tableau = (array) $chaine;    // ["42"]
+$redevientChaine = (string) 42;// "42"
+
+// Avec settype()
+$var = "123";
+settype($var, "integer");
+var_dump($var); // int(123)
+
+// Supprimer une variable
+$a = 5;
+unset($a);
+// $a n'existe plus
+```
+
+📖 [Documentation : Transtypage](https://www.php.net/manual/fr/language.types.type-juggling.php)
+
+#### ✏️ Exercice 08
+> Créez un fichier `08-types.php` : déclarez une variable string contenant `"3.14"`, convertissez-la en int, float et bool, et affichez les résultats avec `var_dump()`.
+
+---
+
+### 6.4 - Les tableaux
+
+Un tableau est une variable qui peut contenir **plusieurs valeurs**. Les tableaux en PHP sont des structures très flexibles.
+
+📖 [Documentation : Tableaux](https://www.php.net/manual/fr/language.types.array.php) | [Fonctions de tableaux](https://www.php.net/manual/fr/ref.array.php)
+
+```php
+<?php
+// Deux syntaxes équivalentes
+$voitures = array("Volvo", "BMW", "Toyota");
+$langages = ["PHP", "MySQL", "JavaScript"];
+```
+
+#### 6.4.1 - Les tableaux indexés
+
+Un tableau indexé possède des clés numériques **automatiques à partir de 0**.
+
+```php
+<?php
+$fruits = ["pomme", "poire", "banane", "fraise", "cerise"];
+
+// Accéder à un élément
+echo $fruits[0]; // pomme
+echo $fruits[2]; // banane
+
+// Compter les éléments
+echo count($fruits); // 5
+
+// Ajouter un élément
+$fruits[] = "kiwi"; // ajouté à l'index 5
+```
+
+#### ✏️ Exercice 09
+> Créez `09-array-index.php` : déclarez `$monTab = ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'];` et affichez chaque élément séparé par un `<hr>` en utilisant `echo` et les index.
+
+#### 6.4.2 - Les tableaux associatifs
+
+Les clés sont des **chaînes de caractères**.
+
+```php
+<?php
+$personne = [
+    "prenom" => "Michaël",
+    "nom" => "Pitz",
+    "age" => 42
+];
+
+echo $personne["prenom"]; // Michaël
+echo $personne["age"];    // 42
+```
+
+#### ✏️ Exercice 10
+> Créez `10-array-assoc.php` : déclarez `$monTabAssoc = ["prenom" => "Michaël", "nom" => "Pitz", "caracteristique" => "égocentrique", "dateDeNaissance" => "1951-03-02"];` et affichez chaque valeur séparée par un `<hr>`.
+
+#### 6.4.3 - Les tableaux multidimensionnels
+
+Des tableaux qui contiennent **d'autres tableaux** :
+
+```php
+<?php
+$stagiaires = [
+    "WEBDEV01" => [
+        "Nom" => "Dupont",
+        "Prenom" => "Jean",
+        "Sites" => [
+            "SitePerso" => "https://example.com/jean/",
+            "github" => "https://github.com/jean",
+        ],
+    ],
+    "WEBDEV02" => [
+        "Nom" => "Martin",
+        "Prenom" => "Marie",
+        "Sites" => [
+            "SitePerso" => "https://example.com/marie/",
+            "github" => "https://github.com/marie",
+        ],
+    ],
+];
+
+// Accéder au github de Marie
+echo $stagiaires["WEBDEV02"]["Sites"]["github"];
+// https://github.com/marie
+```
+
+#### ✏️ Exercice 11
+> Créez `11-array-multi.php` : créez un tableau multidimensionnel de 3 stagiaires avec nom, prénom et un sous-tableau de sites (perso + github). Affichez le github du troisième stagiaire.
+
+---
+
+### 6.5 - Les variables superglobales
+
+Les variables superglobales sont des variables prédéfinies **toujours accessibles** dans tous les contextes. Ce sont des **tableaux associatifs**.
+
+| Variable | Description |
+|----------|-------------|
+| `$_GET` | Données de l'URL (méthode GET) |
+| `$_POST` | Données de formulaire (méthode POST) |
+| `$_REQUEST` | Fusion de `$_GET`, `$_POST` et `$_COOKIE` |
+| `$_SESSION` | Données de session |
+| `$_COOKIE` | Données des cookies |
+| `$_FILES` | Fichiers uploadés |
+| `$_SERVER` | Informations serveur et en-têtes HTTP |
+| `$_ENV` | Variables d'environnement |
+| `$GLOBALS` | Toutes les variables globales |
+
+📖 [Documentation : Superglobales](https://www.php.net/manual/fr/language.variables.superglobals.php)
+
+**Exemple avec `$_GET` :**
+
+L'URL `page.php?section=contact&page=3` remplira `$_GET` ainsi :
+
+```php
+<?php
+var_dump($_GET);
+// array(2) { ["section"]=> string(7) "contact" ["page"]=> string(1) "3" }
+
+echo $_GET["section"]; // contact
+```
+
+#### ✏️ Exercice 12
+> Créez `12-GET.php` : une page HTML avec 4 liens qui pointent vers des variables GET différentes (ex: `?section=accueil`, `?section=contact`, etc.). Affichez le contenu de `$_GET` avec `var_dump()`.
 
 ---
 
