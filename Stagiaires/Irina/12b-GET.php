@@ -5,7 +5,7 @@
 $arrayData = [
     'about' => [
         'Title' => 'A propos',
-        'Text' => "<p> Bienvenue  sur la section concernant mes travaux </p><p>Bonne viiste",
+        'Text' => "<p> Bienvenue  sur la section concernant mes travaux </p><p>Bonne viste",
     ], 
 ]
 
@@ -16,7 +16,7 @@ if(in_array($_GET['section'],$arrayData)) echo "EXISTE";
 
 $title = $arrayData[$_GET['section']]['Title'];
 $text = $arrayData[$_GET['section']]['Text'];
-}else{
+else{
     $title = $arrayData[$_GET['section']]['Title'];
 
 
